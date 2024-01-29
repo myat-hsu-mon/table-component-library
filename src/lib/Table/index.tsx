@@ -78,7 +78,7 @@ export default function Table({ menuItems, filterKeys }: TableProps) {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr className="pl-2">
-                    <td className="whitespace-nowrap py-2 pl-4 pr-2 text-center text-sm">
+                    <td className="whitespace-nowrap py-2 pl-2 pr-2 text-center text-sm">
                       <Checkbox
                         checked={selectAll}
                         onChange={handleSelectAll}
@@ -92,7 +92,7 @@ export default function Table({ menuItems, filterKeys }: TableProps) {
                     <THead name="Details" />
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody className="divide-y divide-gray-100 bg-white">
                   {sortedData.map((employee) => (
                     <TRow
                       data={employee as Employee}

@@ -3,7 +3,7 @@ import Department from "../../../components/Department";
 import FormatDate from "../../../components/FormatDate";
 import Profile from "../../../components/Profile";
 import Status from "../../../components/Status";
-import { formatUSCurrency, getFormattedDate } from "../../../utils";
+import { classNames, formatUSCurrency, getFormattedDate } from "../../../utils";
 
 import { Employee } from "../../../interfaces";
 
@@ -17,12 +17,13 @@ export default function TRow({ data, checked, onChange }: TRowProps) {
   const formattedDate = getFormattedDate(data.paymentDate);
 
   return (
-    <tr
-    // className={classNames({
-    //   "bg-gray-light": data.department === "sales",
-    // })}
-    >
-      <td className="whitespace-nowrap py-4 pl-4 pr-2 text-center text-sm">
+    <tr className={classNames({ "bg-gray-light": checked })}>
+      <td
+        className={classNames(
+          "whitespace-nowrap py-4 pl-2 pr-2 text-center text-sm",
+          { "border-l-4 border-blue": checked },
+        )}
+      >
         <Checkbox checked={checked} onChange={() => onChange(data.id)} />
       </td>
       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
