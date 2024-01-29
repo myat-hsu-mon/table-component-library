@@ -1,0 +1,12 @@
+export { default as SalesIcon } from "./SalesIcon";
+export { default as SupportIcon } from "./SupportIcon";
+export { default as DesignsIcon } from "./DesignsIcon";
+export { default as ArchiveIcon } from "./ArchiveIcon";
+export { default as ShareIcon } from "./ShareIcon";
+export { default as DownloadIcon } from "./DownloadIcon";
+export { default as DetailIcon } from "./DetailIcon";
+export { default as TagIcon } from "./TagIcon";
+export { default as EditIcon } from "./EditIcon";
+export { default as DeleteIcon } from "./DeleteIcon";
+export { default as FilterIcon } from "./FilterIcon";
+export { default as SortIcon } from "./SortIcon";
