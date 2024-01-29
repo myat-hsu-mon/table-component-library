@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "employeeName": "Bob Johnson",
+    "department": "support",
+    "salary": 5503.0,
+    "paymentDate": "2024-01-26",
+    "details": "Customer support",
+    "paymentStatus": "failed"
+  },
+  {
+    "id": 2,
+    "employeeName": "Alice Smith",
+    "department": "sales",
+    "salary": 6000300,
+    "paymentDate": "2024-01-25",
+    "details": "Sales representative",
+    "paymentStatus": "done"
+  },
+  {
+    "id": 3,
+    "employeeName": "Charlie Brown",
+    "department": "designs",
+    "salary": 65010000,
+    "paymentDate": "2024-01-27",
+    "details": "Graphic designer",
+    "paymentStatus": "pending"
+  },
+  {
+    "id": 4,
+    "employeeName": "Diana Williams",
+    "department": "support",
+    "salary": 58900000,
+    "paymentDate": "2024-01-27",
+    "details": "Customer support",
+    "paymentStatus": "done"
+  },
+  {
+    "id": 5,
+    "employeeName": "Eddie Davis",
+    "department": "sales",
+    "salary": 62034401.1,
+    "paymentDate": "2024-01-28",
+    "details": "Sales representative",
+    "paymentStatus": "failed"
+  },
+  {
+    "id": 6,
+    "employeeName": "Fiona Miller",
+    "department": "designs",
+    "salary": 67000,
+    "paymentDate": "2024-01-29",
+    "details": "UI/UX designer",
+    "paymentStatus": "done"
+  },
+  {
+    "id": 7,
+    "employeeName": "George Wilson",
+    "department": "sales",
+    "salary": 58000,
+    "paymentDate": "2024-01-30",
+    "details": "Sales associate",
+    "paymentStatus": "failed"
+  }
+]
