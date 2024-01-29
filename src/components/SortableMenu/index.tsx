@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 import { classNames } from "../../utils";
-import Checkbox from "../Checkbox";
 import { SortIcon } from "../../assets";
 
 import { Employee } from "../../interfaces";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
 
 type SortKey = "paymentDate" | "employeeName" | "salary";
 type SortOrder = "asc" | "desc";
@@ -80,16 +80,41 @@ export default function SortableMenu({
   }, [data, setSortedData, sortKey, sortOrder]);
 
   const handleSort = (option: SortOption) => {
-    console.log("handle sosrt", option.id, id);
     setId(option.id);
     setSortKey(option.key);
     setSortOrder(option.order);
   };
 
+  const renderSortingMenuItem = ({
+    active,
+    option,
+  }: {
+    active: boolean;
+    option: SortOption;
+  }) => (
+    <div className="py-0.5">
+      <div
+        className={classNames(
+          "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm",
+          active ? "bg-gray-100 text-gray-dark" : "text-gray-700",
+        )}
+        onClick={() => handleSort(option)}
+      >
+        <CheckCircleIcon
+          className={`${id === option.id && "text-blue"} h-5 w-5`}
+        />
+        <span>{option.label}</span>
+      </div>
+    </div>
+  );
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-200 bg-white p-2 text-sm font-medium text-gray-dark shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-0">
+        <Menu.Button
+          data-testid="button"
+          className="inline-flex w-full justify-center rounded-md border border-gray-200 bg-white p-2 text-sm font-medium text-gray-dark shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-0"
+        >
           <SortIcon />
         </Menu.Button>
       </div>
@@ -108,18 +133,7 @@ export default function SortableMenu({
             {sortOptions.map((option) => (
               <Menu.Item key={option.label}>
                 {({ active }) => (
-                  <div className="py-0.5">
-                    <div
-                      className={classNames(
-                        "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm",
-                        active ? "bg-gray-100 text-gray-dark" : "text-gray-700",
-                      )}
-                      onClick={() => handleSort(option)}
-                    >
-                      <Checkbox checked={id === option.id} />
-                      <span>{option.label}</span>
-                    </div>
-                  </div>
+                  <>{renderSortingMenuItem({ option, active })}</>
                 )}
               </Menu.Item>
             ))}
