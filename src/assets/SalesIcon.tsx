@@ -6,6 +6,7 @@ export default function SalesIcon() {
       height="18"
       viewBox="0 0 18 18"
       fill="none"
+      data-testid="sales-icon"
     >
       <g id="cart-outline 1">
         <path

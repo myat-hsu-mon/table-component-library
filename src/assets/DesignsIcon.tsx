@@ -6,6 +6,7 @@ export default function DesignsIcon() {
       height="18"
       viewBox="0 0 18 18"
       fill="none"
+      data-testid="designs-icon"
     >
       <g clipPath="url(#clip0_101_197)">
         <path
