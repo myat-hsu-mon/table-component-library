@@ -1,11 +1,9 @@
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 import { FilterIcon } from "../../assets";
 import employees from "../../data/index.json";
 import { capitalize, classNames, isEmptyObject } from "../../utils";
-import Button from "../Button";
 
 import {
   DepartmentType,
@@ -163,10 +161,12 @@ export default function FilterableMenu({
                   <div className="relative grid gap-3  bg-white p-4">
                     <div className="flex items-center justify-between">
                       <h1 className="text-xl font-bold">Filters</h1>
-                      <Button
-                        icon={ArrowPathIcon}
+                      <button
                         onClick={handleResetFilters}
-                      />
+                        className="text-blue underline underline-offset-2"
+                      >
+                        Reset
+                      </button>
                     </div>
                     {Object.entries(filteredOptions).map(([key, values]) => (
                       <div key={key} className="rounded-md bg-gray-50 p-2">
