@@ -26,7 +26,7 @@ export const DefaultTable: Story = {
   },
 };
 
-export const ReducedTable: Story = {
+export const CustomizableTable: Story = {
   args: {
     menuItems: ["Archive", "Share", "Download", "Delete"],
     filterKeys: ["paymentDate", "paymentStatus"],
