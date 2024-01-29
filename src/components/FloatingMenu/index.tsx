@@ -64,6 +64,7 @@ export default function FloatingMenu({
           {validMenuItems.map(({ label, icon: Icon }) => (
             <button
               key={label}
+              data-testid={label}
               data-tooltip-id={label}
               data-tooltip-content={label}
               onClick={() => onMenuItemClick(label)}
