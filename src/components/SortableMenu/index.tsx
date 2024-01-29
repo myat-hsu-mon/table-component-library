@@ -21,27 +21,27 @@ const sortOptions: SortOption[] = [
   {
     id: 1,
     key: "employeeName",
-    label: "Employee Name (ASC)",
+    label: "Sort By Employee Name (Asc)",
     order: "asc",
   },
   {
     id: 2,
     key: "employeeName",
-    label: "Employee Name (DESC)",
+    label: "Sort By Employee Name (Desc)",
     order: "desc",
   },
-  { id: 3, key: "salary", label: "Salary (ASC)", order: "asc" },
-  { id: 4, key: "salary", label: "Salary (DESC)", order: "desc" },
+  { id: 3, key: "salary", label: "Sort By Salary (Asc)", order: "asc" },
+  { id: 4, key: "salary", label: "Sort By Salary (Desc)", order: "desc" },
   {
     id: 5,
     key: "paymentDate",
-    label: "Payment Date (Newest First)",
+    label: "Sort By Payment Date (Newest)",
     order: "desc",
   },
   {
     id: 6,
     key: "paymentDate",
-    label: "Payment Date (Oldest First)",
+    label: "Sort By Payment Date (Oldest)",
     order: "asc",
   },
 ];
@@ -96,14 +96,16 @@ export default function SortableMenu({
       <div
         className={classNames(
           "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm",
-          active ? "bg-gray-100 text-gray-dark" : "text-gray-700",
+          active ? "bg-gray-100 text-gray-dark" : "text-gray",
         )}
         onClick={() => handleSort(option)}
       >
         <CheckCircleIcon
           className={`${id === option.id && "text-blue"} h-5 w-5`}
         />
-        <span>{option.label}</span>
+        <span className={`${id === option.id && "text-blue"}`}>
+          {option.label}
+        </span>
       </div>
     </div>
   );
@@ -128,7 +130,7 @@ export default function SortableMenu({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-dark ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 mt-2 w-72 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-dark ring-opacity-5 focus:outline-none">
           <div className="divide-y divide-gray-200 px-3 py-2">
             {sortOptions.map((option) => (
               <Menu.Item key={option.label}>

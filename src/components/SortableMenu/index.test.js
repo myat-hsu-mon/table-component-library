@@ -15,11 +15,11 @@ describe("SortableMenu component", () => {
 
     //check if the sorting menus are shown or not.
     fireEvent.click(sortButton);
-    expect(screen.getByText("Employee Name (ASC)")).toBeInTheDocument();
-    expect(screen.getByText("Employee Name (DESC)")).toBeInTheDocument();
+    expect(screen.getByText("Sort By Employee Name (Asc)")).toBeInTheDocument();
+    expect(screen.getByText("Sort By Employee Name (Desc)")).toBeInTheDocument();
 
     //check if one menu item, then call menu-items array
-    fireEvent.click(screen.getByText("Employee Name (ASC)"));
+    fireEvent.click(screen.getByText("Sort By Employee Name (Asc)"));
     expect(setSortedDataMock).toHaveBeenCalledWith(expect.any(Array));
   });
 });
