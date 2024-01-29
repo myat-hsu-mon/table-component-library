@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { classNames } from "../../utils";
 
 interface FormatDateProps {
   formattedDate: string;
 }
 
-export default function FormatDate({ formattedDate }: FormatDateProps) {
+export default memo(function FormatDate({ formattedDate }: FormatDateProps) {
   const getStatusColor = () => {
     switch (formattedDate) {
       case "Yesterday":
@@ -25,4 +26,4 @@ export default function FormatDate({ formattedDate }: FormatDateProps) {
       <span data-testid="formatted-date">{formattedDate}</span>
     </div>
   );
-}
+});

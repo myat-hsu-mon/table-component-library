@@ -1,4 +1,4 @@
-import { ComponentType, SVGProps } from "react";
+import { ComponentType, SVGProps, memo } from "react";
 
 import { capitalize } from "../../utils";
 import { SalesIcon, SupportIcon, DesignsIcon } from "../../assets";
@@ -18,7 +18,7 @@ const departmentIcons: Record<
   support: SupportIcon,
 };
 
-const Department = ({ department }: DepartmentProps) => {
+export default memo(function Department({ department }: DepartmentProps) {
   const Icon = departmentIcons[department];
 
   return (
@@ -29,6 +29,4 @@ const Department = ({ department }: DepartmentProps) => {
       </span>
     </div>
   );
-};
-
-export default Department;
+});

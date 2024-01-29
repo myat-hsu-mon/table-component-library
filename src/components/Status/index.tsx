@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { StatusType } from "../../interfaces";
 import { classNames } from "../../utils";
 
@@ -11,7 +12,7 @@ const statusStyles = {
   done: "text-green-dark bg-green-light",
 };
 
-export default function Status({ status }: StatusProps) {
+export default memo(function Status({ status }: StatusProps) {
   const styleClasses = statusStyles[status] || "";
 
   return (
@@ -24,4 +25,4 @@ export default function Status({ status }: StatusProps) {
       {status.toUpperCase()}
     </span>
   );
-}
+});
