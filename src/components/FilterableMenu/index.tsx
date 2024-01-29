@@ -117,7 +117,8 @@ export default function FilterableMenu({
           newState[key].push(value); // Add the value if it doesn't exist
         } else {
           newState[key].splice(index, 1); // Remove the value if it exists
-          if (!newState[key].length) { // delete the key if the value is empty array
+          if (!newState[key].length) {
+            // delete the key if the value is empty array
             delete newState[key];
           }
         }
@@ -143,7 +144,9 @@ export default function FilterableMenu({
         <>
           <Popover.Button className="right-0 flex items-center justify-center gap-1 rounded-md border border-gray-200 bg-white px-2 py-1.5 text-sm outline-none">
             <FilterIcon aria-hidden="true" />
-            <span className="text-sm text-gray-dark">Filters</span>
+            <span className="text-sm text-gray-dark" data-testid="Filters">
+              Filters
+            </span>
           </Popover.Button>
           <Transition
             as={Fragment}
@@ -178,9 +181,9 @@ export default function FilterableMenu({
                                 handleFilter(key, value as string);
                               }}
                               className={classNames(
-                                "rounded-md bg-gray-200/60 px-3.5 py-1.5 text-sm text-gray-dark",
+                                "rounded-md bg-gray-200/70  px-3.5 py-1.5 text-sm text-gray-600",
                                 {
-                                  "bg-gray-500 text-white":
+                                  " bg-blue bg-opacity-20 text-blue":
                                     selectedFilteredItems[key]?.includes(
                                       value as string,
                                     ),
