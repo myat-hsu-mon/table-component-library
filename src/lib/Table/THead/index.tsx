@@ -1,4 +1,6 @@
-export default function THead({ name }: { name: string }) {
+import { memo } from "react";
+
+export default memo(function THead({ name }: { name: string }) {
   return (
     <th
       scope="col"
@@ -7,4 +9,4 @@ export default function THead({ name }: { name: string }) {
       {name}
     </th>
   );
-}
+});
