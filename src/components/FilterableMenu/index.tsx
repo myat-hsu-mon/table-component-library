@@ -234,7 +234,7 @@ export default function FilterableMenu({
 }
 
 const ErrorMessage = () => (
-  <div className="bg-white p-8 text-center text-base text-gray-dark">
+  <div className="bg-red-400 p-8 text-center text-base text-white">
     Invalid Filter Keys! <br />
     <span className="mt-2 inline-block font-light">
       Valid options: department, paymentStatus, paymentDate.
