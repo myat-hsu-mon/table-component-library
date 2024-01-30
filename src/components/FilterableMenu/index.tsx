@@ -17,6 +17,10 @@ interface FilterableMenuProps {
   setFilteredData: Dispatch<SetStateAction<Employee[]>>;
 }
 
+interface FilterMenuItemProps {
+  option: { key: string; value: string };
+}
+
 // Check if provided filter keys are valid
 const areFilterKeysValid = (filterKeys: FilterKeyProp[]): boolean => {
   if (!filterKeys.length) return false;
@@ -148,13 +152,25 @@ export default function FilterableMenu({
     setFilteredData(filterData({}));
   };
 
-  const renderFilterMenuItem = ({
-    key,
-    value,
-  }: {
-    key: string;
-    value: string;
-  }) => (
+  const FilterMenuList = () => (
+    <>
+      {Object.entries(filteredOptions).map(([key, values]) => (
+        <div key={key} className="rounded-md bg-gray-50 p-2">
+          <h1 className="mb-2 text-sm text-gray">{keyTitles[key]}</h1>
+          <div className="flex flex-wrap gap-2.5 rounded-md">
+            {values.map((value) => (
+              <FilterMenuItem
+                option={{ key, value: value as string }}
+                key={value}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </>
+  );
+
+  const FilterMenuItem = ({ option: { key, value } }: FilterMenuItemProps) => (
     <button
       onClick={() => {
         handleFilter(key, value);
@@ -203,31 +219,10 @@ export default function FilterableMenu({
                         Reset
                       </button>
                     </div>
-                    {Object.entries(filteredOptions).map(([key, values]) => (
-                      <div key={key} className="rounded-md bg-gray-50 p-2">
-                        <h1 className="mb-2 text-sm text-gray">
-                          {keyTitles[key]}
-                        </h1>
-                        <div className="flex flex-wrap gap-2.5 rounded-md">
-                          {values.map((value) => (
-                            <Fragment key={value}>
-                              {renderFilterMenuItem({
-                                key,
-                                value: value as string,
-                              })}
-                            </Fragment>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                    <FilterMenuList />
                   </div>
                 ) : (
-                  <div className="bg-white p-8 text-center text-base text-gray-dark">
-                    Invalid Filter Keys! <br />
-                    <span className="mt-2 inline-block font-light">
-                      Valid options: department, paymentStatus, paymentDate.
-                    </span>
-                  </div>
+                  <ErrorMessage />
                 )}
               </div>
             </Popover.Panel>
@@ -237,3 +232,12 @@ export default function FilterableMenu({
     </Popover>
   );
 }
+
+const ErrorMessage = () => (
+  <div className="bg-white p-8 text-center text-base text-gray-dark">
+    Invalid Filter Keys! <br />
+    <span className="mt-2 inline-block font-light">
+      Valid options: department, paymentStatus, paymentDate.
+    </span>
+  </div>
+);

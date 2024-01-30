@@ -68,6 +68,11 @@ interface SortableMenuProps {
   setSortedData: React.Dispatch<React.SetStateAction<Employee[]>>;
 }
 
+interface SortingMenuItemProps {
+  active: boolean;
+  option: SortOption;
+}
+
 export default function SortableMenu({
   data,
   setSortedData,
@@ -88,13 +93,7 @@ export default function SortableMenu({
     setSortOrder(option.order);
   };
 
-  const renderSortingMenuItem = ({
-    active,
-    option,
-  }: {
-    active: boolean;
-    option: SortOption;
-  }) => {
+  const SortingMenuItem = ({ active, option }: SortingMenuItemProps) => {
     const checked = id === option.id;
 
     return (
@@ -136,7 +135,7 @@ export default function SortableMenu({
             {sortOptions.map((option) => (
               <Menu.Item key={option.label}>
                 {({ active }) => (
-                  <>{renderSortingMenuItem({ option, active })}</>
+                  <SortingMenuItem option={option} active={active} />
                 )}
               </Menu.Item>
             ))}
