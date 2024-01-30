@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
 
 import Input from ".";
 
@@ -16,23 +15,4 @@ describe("Input component", () => {
     expect(inputElement).toBeInTheDocument();
     expect(magnifyingGlassIcon).toBeInTheDocument();
   });
-
-  // test("calls onChange when input value changes", () => {
-  //   const placeholder = "Search";
-  //   const name = "searchInput";
-  //   const onChangeMock = jest.fn();
-
-  //   render(
-  //     <Input placeholder={placeholder} name={name} onChange={onChangeMock} />,
-  //   );
-  //   const inputElement = screen.getByPlaceholderText(placeholder);
-
-  //   userEvent.type(inputElement, "hello");
-
-  //   // expect(inputElement).toBeInTheDocument();
-
-  //   expect(onChangeMock).toHaveBeenCalledWith(
-  //     expect.objectContaining({ target: { value: "hello" } }),
-  //   );
-  // });
 });

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import Department from ".";
 
 const meta: Meta<typeof Department> = {
