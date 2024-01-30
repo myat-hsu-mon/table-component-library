@@ -46,6 +46,7 @@ const sortOptions: SortOption[] = [
   },
 ];
 
+// Function to sort data based on the selected key and order
 const sortData = (
   data: Employee[],
   key: SortKey,
@@ -75,10 +76,12 @@ export default function SortableMenu({
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   const [id, setId] = useState<number>(1);
 
+  // Update the sorted data when sorting options or data change
   useEffect(() => {
     setSortedData(sortData(data, sortKey, sortOrder));
   }, [data, setSortedData, sortKey, sortOrder]);
 
+  // Handle sorting when a menu option is selected
   const handleSort = (option: SortOption) => {
     setId(option.id);
     setSortKey(option.key);
@@ -91,35 +94,33 @@ export default function SortableMenu({
   }: {
     active: boolean;
     option: SortOption;
-  }) => (
-    <div className="py-0.5">
-      <div
-        className={classNames(
-          "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm",
-          active ? "bg-gray-100 text-gray-dark" : "text-gray",
-        )}
-        onClick={() => handleSort(option)}
-      >
-        <CheckCircleIcon
-          className={`${id === option.id && "text-blue"} h-5 w-5`}
-        />
-        <span className={`${id === option.id && "text-blue"}`}>
-          {option.label}
-        </span>
+  }) => {
+    const checked = id === option.id;
+
+    return (
+      <div className="py-0.5">
+        <div
+          className={classNames(
+            "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm hover:bg-gray-100",
+            active ? "bg-gray-100 text-gray-dark" : "text-gray",
+          )}
+          onClick={() => handleSort(option)}
+        >
+          <CheckCircleIcon className={`${checked && "text-blue"} h-5 w-5`} />
+          <span className={`${checked && "text-blue"}`}>{option.label}</span>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button
-          data-testid="button"
-          className="inline-flex w-full justify-center rounded-md border border-gray-200 bg-white p-2 text-sm font-medium text-gray-dark shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-0"
-        >
-          <SortIcon />
-        </Menu.Button>
-      </div>
+      <Menu.Button
+        data-testid="button"
+        className="inline-flex w-full justify-center rounded-md border border-gray-200 bg-white p-2 text-sm font-medium text-gray-dark shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-0"
+      >
+        <SortIcon />
+      </Menu.Button>
 
       <Transition
         as={React.Fragment}

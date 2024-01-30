@@ -26,6 +26,7 @@ const menus: MenuItemProps[] = [
   { label: "Delete", icon: DeleteIcon },
 ];
 
+// Function to check if provided menu items are valid
 const isValidMenuItems = (menuItems: string[]): boolean => {
   if (!menuItems.length) return false;
   const validMenuItems: string[] = [
@@ -51,6 +52,8 @@ export default function FloatingMenu({
   onMenuItemClick,
 }: FloatingMenuProps) {
   const isValidMenu = isValidMenuItems(menuItems);
+
+  // Filter out valid menu items from the predefined list
   const validMenuItems = menus.filter((menu) =>
     menuItems
       .map((item) => item.toLowerCase())

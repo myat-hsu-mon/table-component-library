@@ -9,7 +9,6 @@ import FloatingMenu from "../../components/FloatingMenu";
 import Input from "../../components/Input";
 import SortableMenu from "../../components/SortableMenu";
 import employees from "../../data/index.json";
-
 import { Employee, FilterKeyProp, MenuItemProp } from "../../interfaces";
 import NoContent from "../../components/NoContent";
 
@@ -19,20 +18,21 @@ interface TableProps {
 }
 
 export default function Table({ menuItems, filterKeys }: TableProps) {
-  //sorted data
+  // State for sorted data
   const [sortedData, setSortedData] = useState<Employee[]>(
     employees as Employee[],
   );
 
-  //filtered data
+  // State for filtered data
   const [filteredData, setFilteredData] = useState<Employee[]>(
     employees as Employee[],
   );
 
-  //selected rows
+  // State for selected rows
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState(false);
 
+  // Function to toggle selection of a row
   const handleToggleRowSelection = (rowId: number) => {
     const newSelectedRows = selectedRows.includes(rowId)
       ? selectedRows.filter((id) => id !== rowId)
@@ -42,6 +42,7 @@ export default function Table({ menuItems, filterKeys }: TableProps) {
     setSelectAll(employees.length === newSelectedRows.length);
   };
 
+  // Function to handle selection of all rows
   const handleSelectAll = () => {
     if (selectAll) {
       setSelectedRows([]);

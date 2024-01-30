@@ -17,6 +17,7 @@ interface FilterableMenuProps {
   setFilteredData: Dispatch<SetStateAction<Employee[]>>;
 }
 
+// Check if provided filter keys are valid
 const areFilterKeysValid = (filterKeys: FilterKeyProp[]): boolean => {
   if (!filterKeys.length) return false;
 
@@ -42,7 +43,7 @@ function generateFilteredOptions(
   data: Employee[],
   filterKeys: FilterKeyProp[],
 ): ReturnType {
-  //remove unnecessary fields based on filterKeys
+  // Remove unnecessary fields based on filterKeys
   const filteredFields = data.map((element) =>
     filterKeys.reduce((obj: any, key) => {
       if (key in element) {
@@ -52,7 +53,7 @@ function generateFilteredOptions(
     }, {} as Partial<Employee>),
   );
 
-  //Aggregate unique values for each filter
+  // Aggregate unique values for each filter
   return filteredFields.reduce((filteredOptions, employee) => {
     Object.keys(employee).forEach((k) => {
       const key = k as keyof Employee;
@@ -93,6 +94,7 @@ export default function FilterableMenu({
 }: FilterableMenuProps) {
   const isValidFilters = areFilterKeysValid(filterKeys);
 
+  // Generate filtered options based on filter keys
   const filteredOptions = generateFilteredOptions(
     employees as Employee[],
     filterKeys,
@@ -102,25 +104,35 @@ export default function FilterableMenu({
     Record<string, string[]>
   >({});
 
+  /**
+   * Handles filtering logic based on selected filter options.
+   *
+   * @param {string} key - The filter key indicating the field to filter.
+   * @param {string} value - The selected value within the specified filter key.
+   */
   const handleFilter = (key: string, value: string) => {
     setSelectedFilteredItems((prevState) => {
       const newState = { ...prevState };
 
+      // If the key doesn't exist in the state, initialize it with the selected value
       if (!newState[key]) {
         newState[key] = [value];
       } else {
+        // If the key already exists, check if the selected value is present
         const index = newState[key].indexOf(value);
 
         if (index === -1) {
           newState[key].push(value); // Add the value if it doesn't exist
         } else {
           newState[key].splice(index, 1); // Remove the value if it exists
+
+          // If the key's value becomes an empty array, delete the key
           if (!newState[key].length) {
-            // delete the key if the value is empty array
             delete newState[key];
           }
         }
       }
+
       // Filter data with the updated state
       const filteredEmployees = filterData(
         isEmptyObject(newState) ? {} : newState,
@@ -135,6 +147,29 @@ export default function FilterableMenu({
     setSelectedFilteredItems({});
     setFilteredData(filterData({}));
   };
+
+  const renderFilterMenuItem = ({
+    key,
+    value,
+  }: {
+    key: string;
+    value: string;
+  }) => (
+    <button
+      onClick={() => {
+        handleFilter(key, value);
+      }}
+      className={classNames(
+        "rounded-md bg-gray-200/70  px-3.5 py-1.5 text-sm text-gray-600",
+        {
+          " bg-blue bg-opacity-20 text-blue":
+            selectedFilteredItems[key]?.includes(value),
+        },
+      )}
+    >
+      {capitalize(value)}
+    </button>
+  );
 
   return (
     <Popover className="relative">
@@ -175,26 +210,12 @@ export default function FilterableMenu({
                         </h1>
                         <div className="flex flex-wrap gap-2.5 rounded-md">
                           {values.map((value) => (
-                            <button
-                              key={value}
-                              onClick={() => {
-                                handleFilter(key, value as string);
-                              }}
-                              className={classNames(
-                                "rounded-md bg-gray-200/70  px-3.5 py-1.5 text-sm text-gray-600",
-                                {
-                                  " bg-blue bg-opacity-20 text-blue":
-                                    selectedFilteredItems[key]?.includes(
-                                      value as string,
-                                    ),
-                                },
-                              )}
-                            >
-                              {selectedFilteredItems[key]?.includes(
-                                value as string,
-                              )}
-                              {capitalize(value as string)}
-                            </button>
+                            <Fragment key={value}>
+                              {renderFilterMenuItem({
+                                key,
+                                value: value as string,
+                              })}
+                            </Fragment>
                           ))}
                         </div>
                       </div>
