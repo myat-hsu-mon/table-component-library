@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 import { classNames } from "../../utils";
@@ -93,24 +93,26 @@ export default function SortableMenu({
     setSortOrder(option.order);
   };
 
-  const SortingMenuItem = ({ active, option }: SortingMenuItemProps) => {
-    const checked = id === option.id;
+  const SortingMenuItem = forwardRef(
+    ({ active, option }: SortingMenuItemProps, ref) => {
+      const checked = id === option.id;
 
-    return (
-      <div className="py-0.5">
-        <div
-          className={classNames(
-            "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm hover:bg-gray-100",
-            active ? "bg-gray-100 text-gray-dark" : "text-gray",
-          )}
-          onClick={() => handleSort(option)}
-        >
-          <CheckCircleIcon className={`${checked && "text-blue"} h-5 w-5`} />
-          <span className={`${checked && "text-blue"}`}>{option.label}</span>
+      return (
+        <div className="py-0.5">
+          <div
+            className={classNames(
+              "my-1 flex w-full cursor-pointer items-center space-x-2 rounded-md px-2 py-1.5 text-left text-sm hover:bg-gray-100",
+              active ? "bg-gray-100 text-gray-dark" : "text-gray",
+            )}
+            onClick={() => handleSort(option)}
+          >
+            <CheckCircleIcon className={`${checked && "text-blue"} h-5 w-5`} />
+            <span className={`${checked && "text-blue"}`}>{option.label}</span>
+          </div>
         </div>
-      </div>
-    );
-  };
+      );
+    },
+  );
 
   return (
     <Menu as="div" className="relative inline-block text-left">
