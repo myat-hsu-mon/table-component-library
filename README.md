@@ -24,14 +24,19 @@ OR
 git clone https://github.com/myat-hsu-mon/table-component-library.git
 ```
 
-Navigate to the project directory and install the dependencies:
+Navigate to the project directory:
 
 ```bash
 cd table-component-library
-npm install
 ```
 
 ### Development Mode
+
+To install the dependencies:
+
+```bash
+npm install
+```
 
 To run the app in development mode:
 
